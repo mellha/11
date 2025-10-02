@@ -8,13 +8,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>User Token & サーバー入力</h1>
-        <textarea id="user-tokens" placeholder="User Tokenを改行で複数入力&#10;例:&#10;mfa.xxx...&#10;yyy..." rows="4"></textarea>
-        <textarea id="invite-links" placeholder="招待リンクを改行で複数入力&#10;例:&#10;https://discord.gg/abc123&#10;https://discord.gg/def456" rows="4"></textarea>
-        <input type="text" id="role-id" placeholder="自動ロールID (全共通)" />
-        <button id="save-config">保存 & 表示</button>
+        <h1>Discord User Joiner</h1>
+        <div class="input-group">
+            <label>User Token (改行で複数)</label>
+            <textarea id="user-tokens" placeholder="例:&#10;mfa.xxx...&#10;yyy..."></textarea>
+            <label>招待リンク (改行で複数)</label>
+            <textarea id="invite-links" placeholder="例:&#10;https://discord.gg/abc123&#10;https://discord.gg/def456"></textarea>
+            <label>自動ロールID (オプション、全共通)</label>
+            <input type="text" id="role-id" placeholder="例: 1234567890">
+            <button id="save-config">保存してリスト表示</button>
+        </div>
         <p id="status"></p>
-        <h2>参加リスト (Tokenごと)</h2>
+        <h2>参加リスト</h2>
         <div id="server-list"></div>
         <p class="footer"><a href="https://discord.com/terms" target="_blank" rel="noopener">ToS確認必須！</a></p>
     </div>
