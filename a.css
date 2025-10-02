@@ -1,0 +1,113 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #36393f, #202225);
+    color: #dcddde;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+    background: #2f3136;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    padding: 30px;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #7289da;
+    margin-bottom: 10px;
+}
+
+textarea, input {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #40444b;
+    background: #40444b;
+    color: #dcddde;
+    text-align: center;
+    resize: vertical;
+}
+
+#save-config {
+    background: #43b581;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#server-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.token-group {
+    background: #40444b;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.token-group h3 {
+    color: #7289da;
+    margin-bottom: 10px;
+}
+
+.server-card {
+    background: #2f3136;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.server-name {
+    color: #7289da;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.join-button {
+    background: #7289da;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.join-button:hover {
+    background: #5b6eae;
+}
+
+#status {
+    color: #43b581;
+    font-size: 0.9em;
+}
+
+.footer {
+    font-size: 12px;
+    margin-top: 20px;
+    opacity: 0.7;
+}
+
+a {
+    color: #7289da;
+    text-decoration: none;
+}
