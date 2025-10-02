@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusEl = document.getElementById('status');
     const listEl = document.getElementById('server-list');
 
-    // ロード
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { roleId: '', tokens: [], servers: [] };
     roleEl.value = saved.roleId;
     tokensEl.value = saved.tokens.join('\n');
@@ -22,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const invites = linksText.split('\n').map(l => l.trim()).filter(l => l);
 
         if (tokens.length > 0 && invites.length > 0) {
-            // Token数に合わせてサーバー割り当て (例: Token1に最初のN個)
             const numTokens = tokens.length;
             const serversPerToken = Math.ceil(invites.length / numTokens);
             const groupedServers = [];
@@ -37,26 +35,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
             localStorage.setItem(STORAGE_KEY, JSON.stringify({ roleId, tokens, servers: invites }));
             renderList(tokens, groupedServers);
-            statusEl.textContent = `${tokens.length} Token & ${invites.length} リンク保存したよ`;
+            statusEl.textContent = `保存完了！ ${tokens.length} Tokenで${invites.length}サーバーを割り当てました。`;
+            statusEl.style.color = '#43b581';
         } else {
-            statusEl.textContent = 'Tokenとリンク必須';
+            statusEl.textContent = 'Tokenとリンクを入れてください';
+            statusEl.style.color = '#f04747';
         }
     });
 
     function renderList(tokens, groupedServers) {
         listEl.innerHTML = '';
         tokens.forEach((token, i) => {
+            if (groupedServers[i].length === 0) return;
             const group = document.createElement('div');
             group.className = 'token-group';
-            group.innerHTML = `<h3>Token ${i+1} (${token.substring(0, 10)}...)</h3>`;
+            group.innerHTML = `<h3>Token ${i+1} (${token.substring(0, 15)}...)</h3>`;
             groupedServers[i].forEach(server => {
                 const card = document.createElement('div');
                 card.className = 'server-card';
                 card.innerHTML = `
                     <div class="server-name">${server.name}</div>
-                    <a href="${server.invite}" class="join-button" target="_blank" onclick="autoJoin('${token}', '${server.invite}')" rel="noopener">
-                        自動参加
-                    </a>
+                    <button class="join-button" onclick="autoJoin('${token}', '${server.invite}', '${saved.roleId}')">
+                        🚀 自動参加
+                    </button>
                 `;
                 group.appendChild(card);
             });
@@ -64,13 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 自動参加シミュ (ローカルself-botで実装)
-    window.autoJoin = (token, invite) => {
-        console.log(`Token: ${token} で ${invite} に参加中... (ロール: ${saved.roleId})`);
-        statusEl.textContent = '参加処理開始 (コンソール確認)';
+    window.autoJoin = (token, invite, roleId) => {
+        console.log(`Token: ${token.substring(0, 20)}... で ${invite} に参加中... (ロール: ${roleId})`);
+        statusEl.textContent = '参加開始！ コンソールを確認してね (Self-botで実装推奨)';
+        statusEl.style.color = '#7289da';
     };
 
-    // 初期レンダー
     if (saved.tokens.length > 0 && saved.servers.length > 0) {
         const numTokens = saved.tokens.length;
         const serversPerToken = Math.ceil(saved.servers.length / numTokens);
